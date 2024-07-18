@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#fixing issues that rised in using docker
+#make apache server return hello holberton when querying root
+
+sudo apt-get update -y
+sudo apt-get install -y apache2
+sudo echo "Hello Holberton" | sudo tree -a/var/www/html/index.html
+sudo /etc/init.d/apache2 restart
