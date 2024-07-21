@@ -1,0 +1,61 @@
+As a third-year software development student, I find it fascinating how much happens behind the scenes when you type a URL like https://www.google.com into your browser and hit Enter. Let’s break it down step by step to understand this process, from DNS requests to database interactions.
+
+1. DNS Request
+First, your browser needs to translate www.google.com into an IP address so it knows where to send the request.
+
+Browser Cache: The browser checks if it has recently accessed this site.
+OS Cache: If not, it checks your operating system’s cache.
+Router Cache: If still not found, it queries your router’s cache.
+ISP’s DNS Server: If the IP address is still unknown, your ISP’s DNS server is asked.
+Recursive Lookup: If needed, your ISP's DNS server queries other DNS servers until it finds the IP address for www.google.com.
+2. Establishing a TCP/IP Connection
+Once the IP address is found, your browser sets up a connection using TCP (Transmission Control Protocol) over IP (Internet Protocol).
+
+Three-Way Handshake: This process involves:
+SYN: Your browser sends a SYN (synchronize) packet to the server.
+SYN-ACK: The server responds with a SYN-ACK (synchronize-acknowledge) packet.
+ACK: Your browser sends an ACK (acknowledge) packet back, completing the connection setup.
+3. Firewall
+Throughout this connection setup, the data passes through several firewalls.
+
+Client-Side Firewall: Your device’s firewall checks outgoing requests.
+Network Firewall: Your network (or router) firewall also checks the traffic.
+Server-Side Firewall: The request then passes through Google’s firewall, ensuring it's legitimate.
+4. HTTPS and SSL/TLS Handshake
+Because the URL starts with https, the connection should be secure, using SSL/TLS (Secure Sockets Layer/Transport Layer Security).
+
+SSL/TLS Handshake: The browser and server exchange encryption keys and agree on encryption methods.
+Certificate Exchange: The server sends its SSL certificate to the browser for verification.
+Session Keys: Both parties generate session keys to encrypt the data.
+5. Load Balancer
+Big websites like Google use load balancers to handle traffic efficiently.
+
+Traffic Distribution: The load balancer distributes incoming requests to multiple servers based on specific algorithms (e.g., round-robin).
+6. Web Server
+The web server receives the HTTP request and processes it.
+
+Request Handling: The web server interprets the request, checks for static content (like HTML, CSS, JavaScript), and gets ready to serve it.
+7. Application Server
+For dynamic content, the web server forwards the request to an application server.
+
+Processing Dynamic Content: The application server runs code (often in languages like Python, Java, or Node.js), interacts with other services, and prepares a response.
+8. Database Interaction
+If the request needs data (like search results), the application server interacts with a database.
+
+Query Execution: The application server sends a query to the database.
+Data Retrieval: The database processes the query and returns the data to the application server.
+Data Formatting: The application server formats the data into a response (e.g., JSON, HTML) and sends it back to the web server.
+9. Sending the Response
+The web server receives the response and sends it back through the load balancer.
+
+Load Balancer: The load balancer forwards the response to your device.
+Encryption: The response is encrypted using the SSL/TLS session keys.
+TCP/IP Packets: The response is broken into packets and sent over the internet to your device.
+10. Rendering the Page
+Finally, your browser receives the response and starts rendering the webpage.
+
+HTML Parsing: The browser parses the HTML.
+Resource Requests: Additional resources (CSS, JavaScript, images) are requested and fetched.
+Page Rendering: The browser builds the Document Object Model (DOM) and renders the page for you to see.
+Conclusion
+Typing a URL and pressing Enter kicks off a series of intricate processes. From DNS lookups and TCP/IP connections to SSL/TLS handshakes and database queries, these steps ensure you can access websites quickly and securely. Understanding this process highlights the sophisticated technology that powers our everyday internet use.
