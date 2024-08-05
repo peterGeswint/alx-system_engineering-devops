@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# servers are the place of software generating and serving HTML pages
+# Script to install Nginx, set up a basic "Hello World!" webpage, configure a redirect, and create a custom 404 error page
 
 # Update package list
 apt-get update -y
@@ -13,8 +13,8 @@ sudo ufw allow 'Nginx HTTP'
 # Create a simple "Hello World!" HTML file
 echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-# Create a simple 404 error page
-echo "404 Not Found" | sudo tee /var/www/html/404.html > /dev/null
+# Create a custom 404 error page with the specified message
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html > /dev/null
 
 # Add redirect configuration to Nginx default site configuration
 sudo sed -i '/server_name _;/a\\n    location /redirect_me {\n        return 301 https://www.youtube.com/;\n    }\n' /etc/nginx/sites-available/default
@@ -25,5 +25,5 @@ sudo sed -i '/server_name _;/a\\n    error_page 404 /404.html;\n' /etc/nginx/sit
 # Restart Nginx to apply changes
 sudo service nginx restart
 
-echo "Nginx installation and configuration complete. 'Hello World!' page and redirect should be set up."
+echo "Nginx installation and configuration complete. 'Hello World!' page, redirect, and custom 404 error page should be set up."
 
