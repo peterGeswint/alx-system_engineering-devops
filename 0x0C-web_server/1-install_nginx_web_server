@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
-#Installing nginx on the web
+# Script to install Nginx and set up a basic "Hello World!" webpage
 
+# Update package list
+echo "Updating package list..."
 apt-get update -y
+
+# Install Nginx
+echo "Installing Nginx..."
 apt-get install nginx -y
+
+# Allow Nginx through the firewall
+echo "Allowing Nginx HTTP through the firewall..."
 sudo ufw allow 'Nginx HTTP'
-sh -c 'echo "Hello world!" > /var/www/html/index.html'
-service nginx restart
+
+# Create a simple "Hello World!" HTML file
+echo "Setting up the Hello World webpage..."
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Restart Nginx to apply changes
+echo "Restarting Nginx..."
+sudo service nginx restart
+
+echo "Nginx installation and configuration complete. 'Hello World!' page should be available."
+
