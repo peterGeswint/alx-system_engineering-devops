@@ -1,53 +1,19 @@
-nstalling HAProxy and configuring load balancer
+#!/usr/bin/env bash
+# install load balancer
 
-# Update package list
-sudo apt-get update -y
+sudo apt-get -y update
+sudo apt-get -y install haproxy
+sudo chown $USER:USER /etc/haproxy/haproxy.cfg
 
-# Install HAProxy
-sudo apt-get install -y haproxy
-
-# Configure HAProxy
-sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOF
-global
-    log /dev/log local0
-    log /dev/log local1 notice
-    chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
-    stats timeout 30s
-    user haproxy
-    group haproxy
-    daemon
-
-defaults
-    log global
-    mode http
-    option httplog
-    option dontlognull
-    timeout connect 5000
-    timeout client  50000
-    timeout server  50000
-    errorfile 400 /etc/haproxy/errors/400.http
-    errorfile 403 /etc/haproxy/errors/403.http
-    errorfile 408 /etc/haproxy/errors/408.http
-    errorfile 500 /etc/haproxy/errors/500.http
-    errorfile 502 /etc/haproxy/errors/502.http
-    errorfile 503 /etc/haproxy/errors/503.http
-    errorfile 504 /etc/haproxy/errors/504.http
-
-frontend http_front
+echo "
+frontend cryptotechcoder
     bind *:80
-    stats uri /haproxy?stats
-    default_backend http_back
+    mode http
+    default_backend web-backend 
 
-backend http_back
+backend web-backend
     balance roundrobin
-    server web1 192.168.1.1:80 check
-    server web2 192.168.1.2:80 check
-EOF
+    server 439003-web-01 54.162.232.135:80 check
+    server 439003-web-02 18.234.249.5:80 check" >> /etc/haproxy/haproxy.cfg
 
-# Set the proper permissions
-sudo chown root:haproxy /etc/haproxy/haproxy.cfg
-
-# Restart HAProxy to apply the changes
-sudo systemctl restart haproxy
-
+sudo service haproxy restart
