@@ -1,6 +1,5 @@
-nstall and configure Nginx
+# Install and configure Nginx
 
-# Ensure Nginx is installed
 package { 'nginx':
   ensure => installed,
 }
@@ -13,19 +12,29 @@ service { 'nginx':
 }
 
 # Create the root HTML page with "Hello World!"
+
 file { '/var/www/html/index.html':
   ensure  => file,
-  content => "Hello World!",
+  content => 'Hello World!',
+  require => Package['nginx'],
+}
+
+# Create a custom 404 error page with the specified message
+
+file { '/var/www/html/404.html':
+  ensure  => file,
+  content => 'Ceci n\'est pas une page',
   require => Package['nginx'],
 }
 
 # Configure Nginx with a custom configuration
+
 file { '/etc/nginx/sites-available/default':
   ensure  => file,
   content => '
 server {
-    listen 80;
-    server_name _;
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
     root /var/www/html;
     index index.html;
@@ -45,10 +54,11 @@ server {
   notify  => Service['nginx'],
 }
 
-# Create a custom 404 error page
-file { '/var/www/html/404.html':
-  ensure  => file,
-  content => "Ceci n\'est pas une page",
-  require => Package['nginx'],
-}
+# Ensure default site is enabled
 
+exec { 'enable-nginx-default-site':
+  command => '/usr/sbin/nxensite default',
+  unless  => '/usr/sbin/nxensite -q default',
+  require => File['/etc/nginx/sites-available/default'],
+  notify  => Service['nginx'],
+}
