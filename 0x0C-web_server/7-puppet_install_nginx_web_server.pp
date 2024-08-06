@@ -1,64 +1,27 @@
-# Install and configure Nginx
+#Time to practice configuring your server with Puppet! Just as 
+#you did before, we’d like you to install and configure an Nginx
+#server using Puppet instead of Bash. To save time and effort,
+#should also include resources in your manifest to perform a 301
+#redirect when querying /redirect_me.
+
+# Install Nginx with puppet
 
 package { 'nginx':
   ensure => installed,
 }
 
-# Ensure Nginx service is running and enabled
-service { 'nginx':
-  ensure    => running,
-  enable    => true,
-  subscribe => Package['nginx'],
+file_line { 'install':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
 }
-
-# Create the root HTML page with "Hello World!"
 
 file { '/var/www/html/index.html':
-  ensure  => file,
   content => 'Hello World!',
+}
+
+service { 'nginx':
+  ensure  => running,
   require => Package['nginx'],
-}
-
-# Create a custom 404 error page with the specified message
-
-file { '/var/www/html/404.html':
-  ensure  => file,
-  content => 'Ceci n\'est pas une page',
-  require => Package['nginx'],
-}
-
-# Configure Nginx with a custom configuration
-
-file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  content => '
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    location /redirect_me {
-        return 301 https://www.youtube.com/;
-    }
-
-    error_page 404 /404.html;
-}
-  ',
-  require => Package['nginx'],
-  notify  => Service['nginx'],
-}
-
-# Ensure default site is enabled
-
-exec { 'enable-nginx-default-site':
-  command => '/usr/sbin/nxensite default',
-  unless  => '/usr/sbin/nxensite -q default',
-  require => File['/etc/nginx/sites-available/default'],
-  notify  => Service['nginx'],
 }
