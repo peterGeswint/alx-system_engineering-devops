@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 #Run Nginx as Nginx
 
-sudo sed -i 's/user www-data/user nginx' /etc/nginx/nginx.conf
-sudo sed -i 's/user 80/8080/g' /etc/nginx/sites-available/default
+#!/usr/bin/env bash
+# Run Nginx as Nginx
+
+# Update nginx.conf to run as nginx user
+sudo sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+
+# Update the default site configuration to listen on port 8080 instead of 80
+sudo sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
+sudo sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:8080 default_server;/' /etc/nginx/sites-available/default
+
+# Ensure the correct permissions on nginx.conf
 sudo chmod 644 /etc/nginx/nginx.conf
-sudo -u nginx service nginx restart
+
+# Restart Nginx as the root user to apply the changes
+sudo service nginx restart
