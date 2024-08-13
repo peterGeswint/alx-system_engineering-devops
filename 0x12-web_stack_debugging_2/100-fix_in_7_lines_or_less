@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
-#lines or less
+#7 lines or less
 
-# Update nginx.conf to run as nginx user
-sudo sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
-
-# Update the default site configuration to listen on port 8080 instead of 80
+sudo sed -i 's/user www-data/user nginx' /etc/nginx/nginx.conf
 sudo sed -i 's/80/8080/g' /etc/nginx/sites-available/default
-
-# Ensure the correct permissions on nginx.conf
 sudo chmod 644 /etc/nginx/nginx.conf
-#kill apache process that might me running
 pkill apache2
-# Restart Nginx as the root user to apply the changes
 sudo -u nginx service nginx restart
