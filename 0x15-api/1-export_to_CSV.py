@@ -1,4 +1,22 @@
 #!/usr/bin/python3
+
+"""
+1-export_to_CSV.py
+
+This script fetches the TODO list progress for a given employee ID from
+the JSONPlaceholder API and exports the data to a CSV file. Each record
+in the CSV file contains the employee ID, username, task completion status,
+and task title.
+
+Usage:
+    ./1-export_to_CSV.py <employee_id>
+
+Arguments:
+    <employee_id> - An integer representing the ID of the employee.
+
+The resulting CSV file is named <employee_id>.csv.
+"""
+
 import sys
 import requests
 import csv

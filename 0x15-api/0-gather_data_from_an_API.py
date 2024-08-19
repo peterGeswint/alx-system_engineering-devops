@@ -1,4 +1,41 @@
 #!/usr/bin/python3
+
+"""
+0-gather_data_from_an_API.py
+
+This script fetches the TODO list progress for a given employee ID from
+the JSONPlaceholder API and prints the progress in a formatted way. It
+displays the employee's name, the number of completed tasks, and the
+total number of tasks. Additionally, it lists the titles of the completed
+tasks.
+
+Usage:
+    ./0-gather_data_from_an_API.py <employee_id>
+
+Arguments:
+    <employee_id> - An integer representing the ID of the employee.
+
+The output format is as follows:
+    Employee EMPLOYEE_NAME is done with
+    tasks(NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
+    [TAB] TASK_TITLE
+
+Where:
+    - EMPLOYEE_NAME: The name of the employee.
+    - NUMBER_OF_DONE_TASKS: Number of completed tasks.
+    - TOTAL_NUMBER_OF_TASKS: Total number of tasks.
+    - TASK_TITLE: The title of each completed task,
+    indented with a tab and a space.
+
+Example:
+    $ python3 0-gather_data_from_an_API.py 2
+    Employee Ervin Howell is done with tasks(8/20):
+         distinctio vitae autem nihil ut molestias quo
+         voluptas quo tenetur perspiciatis explicabo natus
+         ...
+"""
+
+
 import sys
 import requests
 
