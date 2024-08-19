@@ -16,10 +16,9 @@ Arguments:
 
 The resulting CSV file is named <employee_id>.csv.
 """
-
+import csv
 import sys
 import requests
-import csv
 
 
 def fetch_employee_todo_progress(employee_id):

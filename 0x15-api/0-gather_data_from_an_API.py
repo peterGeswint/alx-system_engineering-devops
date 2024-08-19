@@ -84,7 +84,7 @@ def fetch_employee_todo_progress(employee_id):
         f'{total_tasks}): '
     )
     for task in done_tasks:
-        print(f'   {task}')
+        print(f'    {task}')
 
 
 if __name__ == "__main__":
