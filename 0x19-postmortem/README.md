@@ -1,7 +1,7 @@
-![a frustrated person sitting at a computer]()
+![a frustrated person sitting at a computer](0x19-postmortem/A frustrated person sitting at a computer.webp)
 ## Timeline
 
--August 15, 14:00 UTC: Issue detected when I attempted to SSH into my server and got an “Access Denied” message.
+- August 15, 14:00 UTC: Issue detected when I attempted to SSH into my server and got an “Access Denied” message.
 - August 15, 14:30 UTC: After multiple failed attempts, I started suspecting something was wrong beyond a typo.
 - August 15, 15:00 UTC: I reviewed the project documentation, assuming I missed a step, but it didn't provide a solution.
 - August 15, 16:00 UTC: I attended an SSH workshop with mentors, hoping to find a clue. Felt like I was getting closer, but no success.
@@ -25,14 +25,14 @@ The problem was resolved by resetting the SSH keys, adjusting the key permission
 
 #### mprovements:
 
--Documentation Review: Ensure that I’m using up-to-date and reliable sources when troubleshooting.
--Community Engagement: Earlier engagement with mentors and peers could have saved a lot of time and stress.
--Practical Workshops: More hands-on practice with SSH and server configuration could have prevented the error.
+1. Documentation Review: Ensure that I’m using up-to-date and reliable sources when troubleshooting.
+2. Community Engagement: Earlier engagement with mentors and peers could have saved a lot of time and stress.
+3. Practical Workshops: More hands-on practice with SSH and server configuration could have prevented the error.
 
 ### Tasks:
-1.Update Documentation: Review and update the internal documentation to reflect the latest SSH configuration best practices.
-2.Implement Monitoring: Add monitoring for SSH connection attempts and firewall settings to catch similar issues earlier.
-3.Practice SSH: Schedule regular practice sessions for SSH and server configuration to stay sharp.
+1. Update Documentation: Review and update the internal documentation to reflect the latest SSH configuration best practices.
+2. Implement Monitoring: Add monitoring for SSH connection attempts and firewall settings to catch similar issues earlier.
+3. Practice SSH: Schedule regular practice sessions for SSH and server configuration to stay sharp.
 4. Set Up Alerts: Configure alerts for missed project deadlines to prompt early escalation and prevent repeat scenarios.
 
 
