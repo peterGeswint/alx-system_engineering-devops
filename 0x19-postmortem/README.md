@@ -1,4 +1,4 @@
-![a frustrated person sitting at a computer](0x19-postmortem/A frustrated person sitting at a computer.webp)
+![a frustrated person sitting at a computer](https://github.com/peterGeswint/alx-system_engineering-devops/blob/master/0x19-postmortem/A%20frustrated%20person%20sitting%20at%20a%20computer.webp)
 ## Timeline
 
 - August 15, 14:00 UTC: Issue detected when I attempted to SSH into my server and got an “Access Denied” message.
