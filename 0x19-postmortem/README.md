@@ -1,4 +1,12 @@
 ![a frustrated person sitting at a computer](https://github.com/peterGeswint/alx-system_engineering-devops/blob/master/0x19-postmortem/A%20frustrated%20person%20sitting%20at%20a%20computer.webp)
+## Issue Summary
+Duration of the Outage:
+Start: August 15, 2024, 14:00 UTC
+End: August 18, 2024, 22:00 UTC
+
+## Impact:
+For 72 grueling hours, my web server on the ALX intranet sandbox was as accessible as a castle under siege—completely locked down. I was unable to connect, which meant my project submission was as far out of reach as a pot of gold at the end of a rainbow. Not to mention, I missed my second project deadline, leaving my nerves more fried than last night’s dinner.
+
 ## Timeline
 
 - August 15, 14:00 UTC: Issue detected when I attempted to SSH into my server and got an “Access Denied” message.
@@ -15,7 +23,7 @@
 ### Root Cause and Resolution
 
 #### Root Cause: 
-The primary issue was an SSH configuration error, specifically related to incorrect key permissions and a firewall rule blocking the connection. Complicating matters, I relied on an outdated tutorial that led me down a rabbit hole of incorrect assumptions.
+The primary issue was an SSH configuration error, specifically related to incorrect key permissions and a firewall rule blocking the connection. Complicating matters, I relied on an outdated tutorial that led me down a rabbit hole of incorrect assumptions.It turns out, the SSH configuration was the culprit, with a side of firewall shenanigans. I was blocked at every turn, much like trying to get through to customer service on a Monday morning.
 
 #### Resolution:
 The problem was resolved by resetting the SSH keys, adjusting the key permissions (`chmod 600` for the private key), and updating the firewall settings to allow SSH traffic. The final breakthrough came after applying the layered knowledge from the SSH workshop and community feedback.
@@ -23,7 +31,7 @@ The problem was resolved by resetting the SSH keys, adjusting the key permission
 
 ### Corrective and Preventative Measures
 
-#### mprovements:
+#### Improvements:
 
 1. Documentation Review: Ensure that I’m using up-to-date and reliable sources when troubleshooting.
 2. Community Engagement: Earlier engagement with mentors and peers could have saved a lot of time and stress.
