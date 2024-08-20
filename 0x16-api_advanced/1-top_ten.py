@@ -19,20 +19,21 @@ def top_ten(subreddit):
         None
     """
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
-    headers = {
-
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"         }
+    headers = {'User-Agent': 'my-app/0.0.1'}
 
     try:
         response = requests.get(url, headers=headers, allow_redirects=False)
 
-        if response.status_code == 200:
-            data = response.json()
-            posts = data.get('data', {}).get('children', [])
-
-            for post in posts:
-                print(post.get('data', {}).get('title'))
-        else:
+        # Check if the response is empty or invalid
+        if response.status_code != 200 or not response.content.strip():
             print(None)
-    except requests.RequestException:
+            return
+
+        data = response.json()
+        posts = data.get('data', {}).get('children', [])
+
+        for post in posts:
+            print(post.get('data', {}).get('title'))
+
+    except (requests.RequestException, ValueError):
         print(None)
